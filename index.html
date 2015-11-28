@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app="myApp" ng-controller="Ctrl">
+<html lang="fr" data-ng-app="myApp" data-ng-controller="Ctrl">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,9 +27,8 @@
 	<!-- Script AngularJS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
-
-	<!-- Bibliotheque de dessin -->
-    <script src="app/drawText.js"></script>
+	
+	<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
 	  
 	<!-- BARRE NAVIGATION -->  
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -45,32 +44,23 @@
         </div>
       </div>
     </nav>
-    
+   
     <!-- VU + PALLETTE COULEUR + BOUTON SEND -->
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section">
-              <div class="container">
-                <div class="row">
-                  <div ng-controller="DrawingSpace" class="col-md-8"> 
-					  <canvas height="300" width="400" id="canvas"></canvas>
-					  <span id='info'>Click and drag to draw! {{firstName}} <span>zone de dessin
-				  </div>
-                  <div class="col-md-4">pallet graphique + bouton d'envoie </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="container" data-ng-controller="DrawingSpace">
+		<div class="row">
+			<div class="col-sm-5"> 
+				<canvas id="drawing-canvas" width="480" height="420"></canvas>
+			</div>
+			<div class="col-sm-2"></div>
+			<div id="colorholder" class="col-sm-1"></div>
+		</div>
+	</div>
+    
     <!-- OPTION BOITE A OUTIL -->
     <div>
         <nav>
           <ul class="nav nav-justified">
-            <li class="active"><a href="#"><button onclick="init()">drawText</button></a></li>
+            <li class="active"><a href="#">drawText</a></li>
             <li><a href="#">Projects</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Downloads</a></li>
@@ -79,7 +69,7 @@
           </ul>
         </nav>
     </div>
- 
+    
 	<!-- SCRIPT -->
 
     <!-- Bootstrap core JavaScript
@@ -91,6 +81,7 @@
     <!-- Angular -->
     <script src="app/app.js"></script>
     <script src="app/controller.js"></script>
+    <script src="app/drawing.js"></script>
     
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->
