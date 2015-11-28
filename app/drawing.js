@@ -2,9 +2,9 @@
 $(document).ready(function () {
 	//Set up some globals
     var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
-
-    //Create a reference to the pixel data for our drawing.
-    var pixelDataRef = new Firebase('https://elrggsjz06f.firebaseio-demo.com/');
+	
+    // Create a reference to the pixel data for our drawing.
+	var pixelData = JSON.parse(sessionStorage.pixelData || "{}");
 
     // Set up our canvas
     var myCanvas = document.getElementById('drawing-canvas');
@@ -13,8 +13,16 @@ $(document).ready(function () {
       alert("You must use a browser that supports HTML5 Canvas to run this demo.");
       return;
     }
-
-    //Setup each color palette & add it to the screen
+    
+	// Reload
+	for (pix in pixelData) {
+		var coords = pix.split(":");
+		myContext.fillStyle = "#" + pixelData[pix];
+		myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
+	}
+	
+	
+    // Setup each color palette & add it to the screen
     var colors = ["fff","000","f00","0f0","00f","88f","f8d","f88","f05","f80","0f8","cf0","08f","408","ff8","8ff"];
     for (c in colors) {
       var item = $('<div/>').css("background-color", '#' + colors[c]).addClass("colorbox");
@@ -48,8 +56,18 @@ $(document).ready(function () {
       var dx = Math.abs(x1 - x0), dy = Math.abs(y1 - y0);
       var sx = (x0 < x1) ? 1 : -1, sy = (y0 < y1) ? 1 : -1, err = dx - dy;
       while (true) {
-        //write the pixel into Firebase, or if we are drawing white, remove the pixel
-        pixelDataRef.child(x0 + ":" + y0).set(currentColor === "fff" ? null : currentColor);
+        //write the pixel or if we are drawing white, remove the pixel
+        if (currentColor === "fff") {
+			delete pixelData[x0+":"+y0];
+			myContext.clearRect(x0 * pixSize, y0 * pixSize, pixSize, pixSize);
+		} else {
+			pixelData[x0+":"+y0] = currentColor;
+			myContext.fillStyle = "#" + currentColor;
+			myContext.fillRect(x0 * pixSize, y0 * pixSize, pixSize, pixSize);
+		}
+		// Prendre une photo d'un instant t à stocké dans la session
+        sessionStorage.pixelData = JSON.stringify(pixelData);
+        
 
         if (x0 == x1 && y0 == y1) break;
         var e2 = 2 * err;
@@ -66,19 +84,4 @@ $(document).ready(function () {
     };
     $(myCanvas).mousemove(drawLineOnMouseMove);
     $(myCanvas).mousedown(drawLineOnMouseMove);
-
-    // Add callbacks that are fired any time the pixel data changes and adjusts the canvas appropriately.
-    // Note that child_added events will be fired for initial pixel data as well.
-    var drawPixel = function(snapshot) {
-      var coords = snapshot.key().split(":");
-      myContext.fillStyle = "#" + snapshot.val();
-      myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
-    };
-    var clearPixel = function(snapshot) {
-      var coords = snapshot.key().split(":");
-      myContext.clearRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
-    };
-    pixelDataRef.on('child_added', drawPixel);
-    pixelDataRef.on('child_changed', drawPixel);
-    pixelDataRef.on('child_removed', clearPixel);
   });

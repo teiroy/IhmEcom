@@ -5,6 +5,7 @@ body {
 #drawing-canvas {
   border: 3px solid #999; 
   cursor: crosshair;
+  background-image: url("../images/cirrus.jpg");
 }
 
 .colorbox {
