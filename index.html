@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link rel="icon" href="favicon.ico">
 
     <title>Application mobile</title>
 
@@ -45,22 +45,14 @@
       </div>
     </nav>
    
-    <!-- VU + PALLETTE COULEUR + BOUTON SEND -->
-    <div class="container" data-ng-controller="DrawingSpace">
-		<div class="row">
-			<div class="col-sm-5"> 
-				<canvas id="drawing-canvas" width="480" height="420"></canvas>
-			</div>
-			<div class="col-sm-2"></div>
-			<div id="colorholder" class="col-sm-1"></div>
-		</div>
-	</div>
+    <!-- Zone de contenu -->
+	<div data-ng-view></div>
     
     <!-- OPTION BOITE A OUTIL -->
     <div>
         <nav>
           <ul class="nav nav-justified">
-            <li class="active"><a href="#">drawText</a></li>
+            <li class="active"><a href="#drawing">drawText</a></li>
             <li><a href="#">Projects</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Downloads</a></li>
@@ -81,7 +73,6 @@
     <!-- Angular -->
     <script src="app/app.js"></script>
     <script src="app/controller.js"></script>
-    <script src="app/drawing.js"></script>
     
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->
