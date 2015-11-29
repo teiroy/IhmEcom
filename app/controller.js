@@ -2,30 +2,37 @@
 
 angular.module("appControllers", [])
 
-.controller('Ctrl',
+.controller('MainCtrl',
 [ '$scope', function($scope) {
-    $scope.firstName = "John";
-    $scope.lastName = "Doe";
-    $scope.fullName = function() {
-        return $scope.firstName + " " + $scope.lastName;
-    };
+	$scope.pixelShirt = JSON.parse(
+		sessionStorage.pixelShirt ||
+		'{"backImg" : "../images/cirrus.jpg", "pixelData" : {}}'
+	);
 }])
 
 .controller('WelcomeCtrl',
 [ '$scope', function($scope) {
-   $scope.firstName = "Dohn";
+
+}])
+
+.controller('HelpCtrl',
+[ '$scope', function($scope) {
+
+}])
+
+.controller('BackImgCtrl',
+[ '$scope', function($scope) {
+	$scope.$parent.pixelShirt.backImg = "../images/sunset.png";
+	sessionStorage.pixelShirt = JSON.stringify($scope.$parent.pixelShirt);
 }])
 
 .controller('DrawingCtrl',
 [ '$scope', function($scope) {
-    // jQuery
-	jQuery(document).ready(function () {
+  jQuery(document).ready(function () {
 	//Set up some globals
     var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
+    var pixShirt = $scope.$parent.pixelShirt;
 	
-    // Create a reference to the pixel data for our drawing.
-	var pixelData = JSON.parse(sessionStorage.pixelData || "{}");
-
     // Set up our canvas
     var myCanvas = document.getElementById('drawing-canvas');
     var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
@@ -34,10 +41,15 @@ angular.module("appControllers", [])
       return;
     }
     
+    // Background Image
+	jQuery(myCanvas).css({
+		"background-image" : "url("+pixShirt.backImg+")"
+	});
+    
 	// Reload
-	for (var pix in pixelData) {
+	for (var pix in pixShirt.pixelData) {
 		var coords = pix.split(":");
-		myContext.fillStyle = "#" + pixelData[pix];
+		myContext.fillStyle = "#" + pixShirt.pixelData[pix];
 		myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
 	}
 
@@ -77,15 +89,15 @@ angular.module("appControllers", [])
       while (true) {
         //write the pixel or if we are drawing white, remove the pixel
         if (currentColor === "fff") {
-			delete pixelData[x0+":"+y0];
+			delete pixShirt.pixelData[x0+":"+y0];
 			myContext.clearRect(x0 * pixSize, y0 * pixSize, pixSize, pixSize);
 		} else {
-			pixelData[x0+":"+y0] = currentColor;
+			pixShirt.pixelData[x0+":"+y0] = currentColor;
 			myContext.fillStyle = "#" + currentColor;
 			myContext.fillRect(x0 * pixSize, y0 * pixSize, pixSize, pixSize);
 		}
 		// Prendre une photo d'un instant t à stocké dans la session
-        sessionStorage.pixelData = JSON.stringify(pixelData);
+        sessionStorage.pixelShirt = JSON.stringify(pixShirt);
         
 
         if (x0 == x1 && y0 == y1) break;

@@ -15,6 +15,14 @@ angular.module("myApp", [
     	templateUrl: 'views/drawing.html',
     	controller: 'DrawingCtrl'
     })
+    .when('/selectImage', {
+    	templateUrl: 'views/backImage.html',
+    	controller: 'BackImgCtrl'
+    })
+    .when('/help', {
+    	templateUrl: 'views/help.html',
+    	controller: 'HelpCtrl'
+    })
     .otherwise({
     	redirectTo: '/welcome'
     })
