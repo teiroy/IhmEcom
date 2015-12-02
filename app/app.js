@@ -15,9 +15,9 @@ angular.module("myApp", [
     	templateUrl: 'views/drawing.html',
     	controller: 'DrawingCtrl'
     })
-    .when('/selectImage', {
+    .when('/backImage', {
     	templateUrl: 'views/backImage.html',
-    	controller: 'BackImgCtrl'
+    	controller: 'BackImageCtrl'
     })
     .when('/help', {
     	templateUrl: 'views/help.html',

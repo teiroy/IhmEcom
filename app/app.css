@@ -13,3 +13,7 @@ body {
   margin: 1px;
   border: 3px solid black;
 }
+
+img.selected {
+	border: 5px solid red;
+}

@@ -3,12 +3,14 @@
 angular.module("appControllers", [])
 
 .controller('MainCtrl',
-[ '$scope', function($scope) {
+[ '$scope', '$http', function($scope, $http) {
 	$scope.pixelShirt = JSON.parse(
 		sessionStorage.pixelShirt ||
 		'{"backImg" : "../images/cirrus.jpg", "pixelData" : {}}'
 	);
+	$scope.selectedImg = {};
 }])
+
 
 .controller('WelcomeCtrl',
 [ '$scope', function($scope) {
@@ -20,11 +22,36 @@ angular.module("appControllers", [])
 
 }])
 
-.controller('BackImgCtrl',
+.controller('BackImageCtrl',
 [ '$scope', function($scope) {
-	$scope.$parent.pixelShirt.backImg = "../images/sunset.png";
-	sessionStorage.pixelShirt = JSON.stringify($scope.$parent.pixelShirt);
+		// Set up
+		$scope.listeImg = [
+			{
+			  id : "0", url: "http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/US_1.svg/50px-US_1.svg.png"
+			},
+			{
+			  id : "1", url: "http://www.dickson-constant.com/medias/images/catalogue/api/0017-bleu-680.jpg"
+			},
+			{
+			  id : "2", url: "http://www.dickson-constant.com/medias/images/catalogue/api/6028-noir-zoom.jpg"
+			},
+			{
+			  id : "3", url: "http://www.dickson-constant.com/medias/images/catalogue/api/0017-bleu-680.jpg"
+			}
+			];
+		
+		$scope.select = function(img) {
+			$scope.pixelShirt.backImg = img.url ;
+			$scope.selectedImg = img;	
+		};
+	 
 }])
+/*
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("http://www.w3schools.com/angular/customers.php")
+    .then(function(response) {$scope.names = response.data.records;});
+});
+*/
 
 .controller('DrawingCtrl',
 [ '$scope', function($scope) {
