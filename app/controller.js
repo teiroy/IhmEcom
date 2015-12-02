@@ -142,6 +142,16 @@ app.controller('customersCtrl', function($scope, $http) {
     };
     $(myCanvas).mousemove(drawLineOnMouseMove);
     $(myCanvas).mousedown(drawLineOnMouseMove);
+    
+    //Swipe image to server
+    $scope.envoyer = function(){
+    	console.log("SWIPE envoyer");
+    }
+    $scope.recuperer = function(){
+    	console.log("SWIPE recuperer");
+    }
+    
+    
   });
 
 }])

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module("myApp", [
-	'ngRoute', 'appControllers'
+	 'ngRoute', 'appControllers', 'ngTouch',
 ])
 
 .config(
