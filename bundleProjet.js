@@ -51,6 +51,7 @@
 			.controller	( 'sendController', function ($scope) {
 
 							var myCanvas = document.getElementById('drawing-canvas');
+							var myId;
 							   this.platforms     = platforms.array;
 							   
 							  this.sendMessage = function(id,message){
@@ -65,10 +66,7 @@
 							  	console.log("send : ", sessionStorage);
 							  };
 
-							   this.getImage = function(){
-							 		//TODO recup id source
-									platforms.get('getImage');
-							  };
+							  
 
 							 // console.log(testMMController);
 							  platforms.init   ( "/MM" );
@@ -79,6 +77,16 @@
 							    testMMController.messageReceived = message;
 							    $scope.$apply();
 							  });
+
+							  platforms.on('yourId', function(msg){
+								 myId=msg;
+								 console.log("Identifiant de la plateforme initialisé :", myId);
+							    });
+
+							   this.getImage = function(){
+							 		//TODO recup id source
+									platforms.get('getImage', myId);
+							  };
 
 							  platforms.on('getImage', function(msg){
 								var pixShirt = msg;
@@ -230,7 +238,7 @@
 					 , init		: init_SIO
 					 , on : function(title,callback) {socket.on(title,callback);}
 					 , send : function(target,title,body) {socket.emit("send",{title:title, target:target, body:body});}
-					 , get : function(title) {socket.emit("get",{title:title});}
+					 , get : function(title, source) {socket.emit("get",{title:title, source:source});}
 					 , broadcast : function(title,body) {socket.emit("broadcast",{title:title,body:body});}
 					 };
 					 

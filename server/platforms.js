@@ -2,7 +2,7 @@ var platforms	= {}
   , sio
   , idPtf		= 0;
 
-var test = {id:1 , data:{}};
+var test = {id:0 , data:{}};
 
 module.exports = {
 	  getPlatforms			: function() {
@@ -41,7 +41,7 @@ module.exports = {
 									//body le message à transmettre
 									//attribut title dans l'objet
 									if (platforms[message.target]) {
-										platforms[1].socket.emit(message.title,message.body);
+										platforms[0].socket.emit(message.title,message.body);
 										//test.id = message.target;
 										test.data = message.body;
 										}
@@ -53,7 +53,7 @@ module.exports = {
 									//body le message à transmettre
 									//attribut title dans l'objet
 										console.log("get", test.data);
-										platforms[0].socket.emit(message.title,test.data);
+										platforms[message.source].socket.emit(message.title,test.data);
 										
 									}
 							 );
@@ -80,6 +80,7 @@ module.exports = {
 			 fctCB( id );
 			}
 		 socket.emit("platforms", this.getPlatforms());
+		 platforms[id].socket.emit("yourId",id);
 		 sio.emit("append", this.getPlatformFromSocket(socket));
 		 return id;
 		}

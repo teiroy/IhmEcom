@@ -209,7 +209,7 @@
 					 , init		: init_SIO
 					 , on : function(title,callback) {socket.on(title,callback);}
 					 , send : function(target,title,body) {socket.emit("send",{title:title, target:target, body:body});}
-					 , get : function(title) {socket.emit("get",{title:title});}
+					 , get : function(title, source) {socket.emit("get",{title:title, source:source});}
 					 , broadcast : function(title,body) {socket.emit("broadcast",{title:title,body:body});}
 					 };
 					 

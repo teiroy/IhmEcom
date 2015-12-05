@@ -5,6 +5,7 @@ angular	.module('myApp')
 		.controller	( 'sendController', function ($scope) {
 
 						var myCanvas = document.getElementById('drawing-canvas');
+						var myId;
 						   this.platforms     = platforms.array;
 						   
 						  this.sendMessage = function(id,message){
@@ -19,10 +20,7 @@ angular	.module('myApp')
 						  	console.log("send : ", sessionStorage);
 						  };
 
-						   this.getImage = function(){
-						 		//TODO recup id source
-								platforms.get('getImage');
-						  };
+						  
 
 						 // console.log(testMMController);
 						  platforms.init   ( "/MM" );
@@ -33,6 +31,16 @@ angular	.module('myApp')
 						    testMMController.messageReceived = message;
 						    $scope.$apply();
 						  });
+
+						  platforms.on('yourId', function(msg){
+							 myId=msg;
+							 console.log("Identifiant de la plateforme initialisé :", myId);
+						    });
+
+						   this.getImage = function(){
+						 		//TODO recup id source
+								platforms.get('getImage', myId);
+						  };
 
 						  platforms.on('getImage', function(msg){
 							var pixShirt = msg;
