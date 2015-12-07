@@ -38,9 +38,7 @@ angular	.module('myApp')
 
 						   this.getImage = function(){
 						 		//TODO recup id source
-						 		console.log("Receipt");
 								platforms.get('getImage', myId);
-								console.log("Receive :", sessionStorage);
 							};
 
 						  this.changeDisplay = function(id){
