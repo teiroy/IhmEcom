@@ -41,7 +41,7 @@ module.exports = {
 									//body le message à transmettre
 									//attribut title dans l'objet
 									if (platforms[message.target]) {
-										platforms[0].socket.emit(message.title,message.body);
+										platforms[0].socket.emit(message.title,message.source,message.body);
 										//test.id = message.target;
 										platforms[message.source].obj = message.body;
 										console.log(platforms[message.source].obj);

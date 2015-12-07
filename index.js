@@ -76,7 +76,7 @@ angular	.module('myApp')
 						    $scope.$apply();
 						  });
 
-						   platforms.on('sendImage', function(msg){
+						   platforms.on('sendImage', function(source,msg){
 						    console.log(msg);
 						    var pixShirt = msg;
 						    var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
@@ -102,6 +102,31 @@ angular	.module('myApp')
 								var coords = pix.split(":");
 								myContext.fillStyle = "#" + pixShirt.pixelData[pix];
 								myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
+							}
+
+							var pixSize1 = 2, lastPoint = null, currentColor = "000", mouseDown = 0;
+
+							var myCanvas1 = document.getElementById('drawing-canvas-'+source);
+						    var myContext1 = myCanvas1.getContext ? myCanvas1.getContext('2d') : null;
+
+						    //Clear context for redrawing
+							myContext1.clearRect(0, 0, myCanvas1.width, myCanvas1.height);
+
+						    if (myContext1 == null) {
+						      alert("You must use a browser that supports HTML5 Canvas to run this demo.");
+						      return;
+						    }
+						    
+						    // Background Image
+							jQuery(myCanvas1).css({
+								"background-image" : "url("+pixShirt.backImg+")"
+							});
+						    
+							// Reload
+							for (var pix in pixShirt.pixelData) {
+								var coords = pix.split(":");
+								myContext1.fillStyle = "#" + pixShirt.pixelData[pix];
+								myContext1.fillRect(parseInt(coords[0]) * pixSize1, parseInt(coords[1]) * pixSize1, pixSize1, pixSize1);
 							}
 						   // $scope.pixelShirt = JSON.parse(msg);
 						    $scope.$apply();

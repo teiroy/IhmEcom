@@ -71,7 +71,8 @@ gulp.task("webpack", function(callback) {
     webpack({
 			entry	: {
 				bundleTest			: "./test.js",
-				bundleProjet 			: "./index.js"
+				bundleProjet 			: "./index.js",
+				bundleDisplay			: "./display.js"
 			},
 			output	: {
 				path			: "./",
@@ -113,6 +114,7 @@ var filesToWatch =	[ './css/**/*.css'
 					, './js/**/*.css'
 					, './test.js'
 					, './index.js'
+					, './display.js'
 					, './app/*.js'
 					, './app/*.css'
 					, './server/**/*.js'
