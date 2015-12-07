@@ -53,6 +53,9 @@
             <div data-ng-controller="sendController as sc">
               <button ng-click="sc.sendImage()">Envoyer</button>
               <button ng-click="sc.getImage()">Recupérer</button>
+              <section ng-repeat="P in sc.platforms" class="platform">
+                <button ng-click="sc.changeDisplay(P.id)">Afficher {{P.id}}</button>
+              </section>
             </div>
           </ul>
         </div><!--/.nav-collapse -->

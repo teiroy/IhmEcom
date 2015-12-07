@@ -11,16 +11,7 @@ angular	.module('myApp')
 						  this.sendMessage = function(id,message){
 						  	platforms.send(id,'test',message);
 						  };
-
-						  this.sendImage = function(){
-						  //var imgData=ctx.getImageData(0,0,200,100);
-						  //var msg = {w:imgData.width, h:imgData.height, data:imgData.data.buffer};
-						  	console.log("Sending");
-						  	platforms.send(1,'sendImage',$scope.pixelShirt);
-						  	console.log("send : ", sessionStorage);
-						  };
-
-						  
+		  
 
 						 // console.log(testMMController);
 						  platforms.init   ( "/MM" );
@@ -37,9 +28,22 @@ angular	.module('myApp')
 							 console.log("Identifiant de la plateforme initialisé :", myId);
 						    });
 
+						  this.sendImage = function(){
+						  //var imgData=ctx.getImageData(0,0,200,100);
+						  //var msg = {w:imgData.width, h:imgData.height, data:imgData.data.buffer};
+						  	console.log("Sending");
+						  	platforms.send(1,myId,'sendImage',$scope.pixelShirt);
+						  	console.log("send : ", sessionStorage);
+						  };
+
 						   this.getImage = function(){
 						 		//TODO recup id source
 								platforms.get('getImage', myId);
+						  };
+
+						  this.changeDisplay = function(id){
+						 		//TODO recup id source
+								platforms.changeDisplay('changeDisplay', id);
 						  };
 
 						  platforms.on('getImage', function(msg){
@@ -48,6 +52,10 @@ angular	.module('myApp')
 						    // Set up our canvas
 						    var myCanvas = document.getElementById('drawing-canvas');
 						    var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
+
+						    //Clear context for redrawing
+							myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+							
 						    if (myContext == null) {
 						      alert("You must use a browser that supports HTML5 Canvas to run this demo.");
 						      return;
@@ -68,13 +76,48 @@ angular	.module('myApp')
 						    $scope.$apply();
 						  });
 
-						  platforms.on('sendImage', function(msg){
+						   platforms.on('sendImage', function(msg){
 						    console.log(msg);
 						    var pixShirt = msg;
 						    var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
 						    // Set up our canvas
 						    var myCanvas = document.getElementById('drawing-canvas');
 						    var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
+
+						    //Clear context for redrawing
+							myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+						    if (myContext == null) {
+						      alert("You must use a browser that supports HTML5 Canvas to run this demo.");
+						      return;
+						    }
+						    
+						    // Background Image
+							jQuery(myCanvas).css({
+								"background-image" : "url("+pixShirt.backImg+")"
+							});
+						    
+							// Reload
+							for (var pix in pixShirt.pixelData) {
+								var coords = pix.split(":");
+								myContext.fillStyle = "#" + pixShirt.pixelData[pix];
+								myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
+							}
+						   // $scope.pixelShirt = JSON.parse(msg);
+						    $scope.$apply();
+						  });
+
+						  platforms.on('changeDisplay', function(msg){
+						    console.log(msg);
+						    var pixShirt = msg;
+						    var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
+						    // Set up our canvas
+						    var myCanvas = document.getElementById('drawing-canvas');
+						    var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
+
+						    //Clear context for redrawing
+							myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
 						    if (myContext == null) {
 						      alert("You must use a browser that supports HTML5 Canvas to run this demo.");
 						      return;
