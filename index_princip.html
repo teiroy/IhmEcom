@@ -1,21 +1,49 @@
-<html>
-  
+<!DOCTYPE html>
+<html lang="fr" data-ng-app="myApp" data-ng-controller="MainCtrl">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.png">
+
+    <title>Application mobile</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="CSS/jcarousel.responsive.css">
+    
+    <!-- Custom styles for this template -->
+    <link href="app/app.css" rel="stylesheet">
+    <link href="app/welcome.css" rel="stylesheet">
+    <link href="app/notification.css" rel="stylesheet">
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="bundleProjet.js" defer></script>
+
+  </head>
+  
+  <body>
+	<!-- Script AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-touch.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.4/jquery.jcarousel.min.js"></script>
     <script type="text/javascript" src="js/jcarousel.responsive.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-    rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-    rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="CSS/jcarousel.responsive.css">
-  </head>
-  
-  <body data-spy="scroll">
+	
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -151,8 +179,8 @@
     </footer>
 -->
     <!-- Angular -->
-    <script src="app/app.js"></script>
-    <script src="app/controller.js"></script>
+    <script src="app/appView.js"></script>
+    <script src="app/controllerView.js"></script>
   </body>
 
 </html>
