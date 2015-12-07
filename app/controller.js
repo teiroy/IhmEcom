@@ -7,7 +7,7 @@ angular.module("appControllers", [])
 [ '$scope', '$http', function($scope, $http) {
 	$scope.pixelShirt = JSON.parse(
 		sessionStorage.pixelShirt ||
-		'{"backImg" : "../images/cirrus.jpg", "pixelData" : {}}'
+		'{"backImg" : "", "pixelData" : {}}'
 	);
 	$scope.selectedImg = {};
 }])
@@ -25,6 +25,19 @@ angular.module("appControllers", [])
 
 .controller('BackImageCtrl',
 [ '$scope', function($scope) {
+		
+		/*$scope.listeImg = function() {
+			var tab = new Array();;
+			var dossier = space.childByNamePath("../images");
+			var images = dossier.children;
+			var nombreImg = images.length;
+		
+			for(var i=0;i<nombreImg;i++){
+				console.log(tab[i] + "bla");
+				tab[i] = images[i].name; //recupere le nom du document courant contenu dans l'espace "../images"
+			}
+			return tab;
+		};*/
 		// Set up
 		$scope.listeImg = [
 			{
@@ -47,15 +60,10 @@ angular.module("appControllers", [])
 		};
 	 
 }])
-/*
-app.controller('customersCtrl', function($scope, $http) {
-    $http.get("http://www.w3schools.com/angular/customers.php")
-    .then(function(response) {$scope.names = response.data.records;});
-});
-*/
 
 .controller('DrawingCtrl',
 [ '$scope', function($scope) {
+
   jQuery(document).ready(function () {
 	//Set up some globals
     var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
@@ -144,14 +152,17 @@ app.controller('customersCtrl', function($scope, $http) {
     $(myCanvas).mousemove(drawLineOnMouseMove);
     $(myCanvas).mousedown(drawLineOnMouseMove);
     
-    //Swipe image to server
-    $scope.envoyer = function(){
-    	console.log("SWIPE envoyer");
-    }
-    $scope.recuperer = function(){
-    	console.log("SWIPE recuperer");
-    }
+    $scope.envoyer = function(sc){
+    	console.log("SWIPE LEFT : envoyer");
+    	$('<div class="alert-box success" >Message successfully send!</div>').prependTo('nav').delay(2000).fadeOut(1000, function() { $('.alert-box').remove(); });
+    	sc.sendImage();
+    };
     
+    $scope.recuperer = function(sc){
+    	console.log("SWIPE RIGHT : recuperer");
+    	$('<div class="alert-box success" >Message successfully receive!</div>').prependTo('nav').delay(2000).fadeOut(1000, function() { $('.alert-box').remove(); });
+    	sc.getImage();
+    };
     
   });
 

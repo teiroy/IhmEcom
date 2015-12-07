@@ -16,6 +16,7 @@
     <!-- Custom styles for this template -->
     <link href="app/app.css" rel="stylesheet">
     <link href="app/welcome.css" rel="stylesheet">
+    <link href="app/notification.css" rel="stylesheet">
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -45,7 +46,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#welcome">PIXEL-SHIRT</a>
+          <a class="navbar-brand" href="#welcome">MIXIT</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -65,17 +66,7 @@
     </nav>
 
     <!-- Zone de contenu -->
-	<div data-ng-view></div>
-  <div data-ng-controller="sendController as sc">
-    <button ng-click="sc.sendImage()">Envoyer</button>
-    <button ng-click="sc.getImage()">Recupérer</button>
-    <div>
-    <section ng-repeat="P in sc.platforms" class="platform">
-      <button ng-click="sc.changeDisplay(P.id)"><canvas id='drawing-canvas-{{P.id}}' width="120" height="105"></canvas></button>
-    </section>
-    <div>
-  </div>
-
+	<div data-ng-view ></div>
     
 	<!-- SCRIPT -->
 

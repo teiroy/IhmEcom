@@ -1,9 +1,9 @@
 <div class="container">
 	<span ng-repeat="img in listeImg">
 		<img 
-			 ng-src="{{img.url}}" 
-			 ng-click="select(img)"
-			 ng-class="{selected: img === selectedImg }"
+			 data-ng-src="{{img.url}}" 
+			 data-ng-click="select(img)"
+			 data-ng-class="{selected: img === selectedImg }"
 			 />
 	</span>
 </div>
