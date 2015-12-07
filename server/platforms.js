@@ -2,13 +2,13 @@ var platforms	= {}
   , sio
   , idPtf		= 0;
 
-var test = {id:0 , data:{}};
+var idDis;
 
 module.exports = {
 	  getPlatforms			: function() {
 		 var res = [];
 		 for(var p in platforms) {
-			 res.push( { id	: p, platform: platforms[p].descr} );
+			 res.push( { id	: p, platform: platforms[p].descr, obj: platforms[p].obj} );
 			}
 		 return res;
 		}
@@ -41,9 +41,12 @@ module.exports = {
 									//body le message à transmettre
 									//attribut title dans l'objet
 									if (platforms[message.target]) {
-										platforms[0].socket.emit(message.title,message.body);
+										platforms[0].socket.emit(message.title,message.source,message.body);
 										//test.id = message.target;
-										test.data = message.body;
+										platforms[message.source].obj = message.body;
+										console.log(platforms[message.source].obj);
+										idDis = message.source;
+										//test.data = message.body;
 										}
 									}
 							 );
@@ -52,8 +55,19 @@ module.exports = {
 									//message contient target l'identifiant de la plateforme à qui on envoie le msg
 									//body le message à transmettre
 									//attribut title dans l'objet
-										console.log("get", test.data);
-										platforms[message.source].socket.emit(message.title,test.data);
+										//platforms[message.source].socket.emit(message.title,test.data);
+										platforms[message.source].socket.emit(message.title,platforms[idDis].obj);
+										
+									}
+							 );
+					  socket.on( "changeDisplay"
+							  , function(message){
+									//message contient target l'identifiant de la plateforme à qui on envoie le msg
+									//body le message à transmettre
+									//attribut title dans l'objet
+										idDis = message.idDisplayed;
+										console.log("idDisplayed", this.idDis);
+										platforms[0].socket.emit(message.title,platforms[idDis].obj);
 										
 									}
 							 );
@@ -66,6 +80,7 @@ module.exports = {
 			 if(platforms[p].socket === socket) {
 				 return { id		: p
 						, platform	: platforms[p].descr
+						, obj : platforms[p].obj
 						};
 				}
 			}
@@ -75,6 +90,7 @@ module.exports = {
 		 var id	= idPtf++;
 		 platforms[id]	= { socket	: socket
 						  , descr	: descr
+						  , obj:{}
 						  };
 		 if(fctCB) {
 			 fctCB( id );

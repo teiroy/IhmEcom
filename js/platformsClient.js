@@ -86,8 +86,9 @@ module.exports = { array	: platforms
 				 , subscribe: function(cb)		 {L_CB.push(cb);}
 				 , init		: init_SIO
 				 , on : function(title,callback) {socket.on(title,callback);}
-				 , send : function(target,title,body) {socket.emit("send",{title:title, target:target, body:body});}
+				 , send : function(target,source,title,body) {socket.emit("send",{title:title, target:target, source:source, body:body});}
 				 , get : function(title, source) {socket.emit("get",{title:title, source:source});}
+				 , changeDisplay : function(title, idDisplayed) {socket.emit("changeDisplay",{title:title, idDisplayed:idDisplayed});}
 				 , broadcast : function(title,body) {socket.emit("broadcast",{title:title,body:body});}
 				 };
 				 
