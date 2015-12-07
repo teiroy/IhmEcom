@@ -26,31 +26,44 @@ angular.module("appControllers", [])
 .controller('BackImageCtrl',
 [ '$scope', function($scope) {
 		
-		/*$scope.listeImg = function() {
-			var tab = new Array();;
-			var dossier = space.childByNamePath("../images");
+		$scope.listeImg2 = function() {
+			var tab = new Array();
+			var dossier = userhome.childByNamePath("images");
 			var images = dossier.children;
 			var nombreImg = images.length;
 		
 			for(var i=0;i<nombreImg;i++){
 				console.log(tab[i] + "bla");
-				tab[i] = images[i].name; //recupere le nom du document courant contenu dans l'espace "../images"
+				tab[i] = {url : images[i].name}; //recupere le nom du document courant contenu dans l'espace "../images"
 			}
 			return tab;
-		};*/
+		};
+		
 		// Set up
 		$scope.listeImg = [
 			{
-			  id : "0", url: "http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/US_1.svg/50px-US_1.svg.png"
+			  url: window.location.origin + "/images/autumn-1042349_960_720.jpg"
 			},
 			{
-			  id : "1", url: "http://www.dickson-constant.com/medias/images/catalogue/api/0017-bleu-680.jpg"
+			  url: window.location.origin + "/images/caudata-1073282_960_720.jpg"
 			},
 			{
-			  id : "2", url: "http://www.dickson-constant.com/medias/images/catalogue/api/6028-noir-zoom.jpg"
+			  url: window.location.origin + "/images/drip-1048722_960_720.jpg"
 			},
 			{
-			  id : "3", url: "http://www.dickson-constant.com/medias/images/catalogue/api/0017-bleu-680.jpg"
+			  url: window.location.origin + "/images/nice-1046188_960_720.jpg"
+			},
+			{
+			  url: window.location.origin + "/images/frog-927764_960_720.jpg"
+			},
+			{
+			  url: window.location.origin + "/images/flowers-1037624_960_720.jpg"
+			},
+			{
+			  url: window.location.origin + "/images/elephant-970456_960_720.jpg"
+			},
+			{
+			  url: window.location.origin + "/images/sunrise-1014550_960_720.jpg"
 			}
 			];
 		
