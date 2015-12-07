@@ -1,0 +1,34 @@
+<!doctype html>
+
+<html ng-app="testMM">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1" />
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="bundleTest.js" defer></script>
+	
+	<link rel="stylesheet" href="test.css"></link>
+</head>
+<body ng-controller="testMMController as test">
+	<h1>Platforms</h1>
+	<section class="platforms">
+		<section ng-repeat="P in test.platforms" class="platform">
+			<h1>{{P.platform.name}}</h1>
+			<p>{{P.platform.screen.height}} x {{P.platform.screen.width}}</p>
+			<button ng-click="test.sendMessage(P.id, messageToSend)">Send</button>
+			<button ng-click="test.sendImage(P.id)">Envoyer image</button>
+			<button ng-click="test.getImage(P.id)">Get</button>
+		</section>
+		<input ng-model="messageToSend"></input>
+		<p ng-bind="test.messageReceived"></p>
+	</section>
+	<canvas id="myCanvas" width="200" height="100" style="border:2px solid;"></canvas>
+
+	<form action="/upload" method="post" enctype="multipart/form-data">
+		<input type="file" name ="tempFile">
+	    <input type="submit" value="Upload">
+	</form> 
+	{{test.platforms | json}}
+</body>
+</html>

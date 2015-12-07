@@ -1,0 +1,103 @@
+<!-- VU + PALLETTE COULEUR + BOUTON SEND -->
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1" />
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="bundleTest.js" defer></script>
+	
+	<link rel="stylesheet" href="test.css"></link>
+</head>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-5"> 
+			<canvas id="drawing-canvas" width="480" height="420"></canvas>
+		<h1>Platforms</h1>
+		<section class="platforms">
+			<section ng-repeat="P in test.platforms" class="platform">
+				<h1>{{P.platform.name}}</h1>
+				<p>{{P.platform.screen.height}} x {{P.platform.screen.width}}</p>
+				<button ng-click="test.sendMessage(P.id, messageToSend)">Send</button>
+				<button ng-click="test.sendImage(P.id)">Envoyer image</button>
+				<button ng-click="test.getImage(P.id)">Get</button>
+			</section>
+			<input ng-model="messageToSend"></input>
+			<p ng-bind="test.messageReceived"></p>
+		</section>
+		</div>
+		<div class="col-sm-2"></div>
+		<div id="colorholder" class="col-sm-1"></div>
+	</div>
+</div>
+<script>
+var platforms = require("./js/platformsClient.js");
+
+angular	.module('testMM', [])
+		.controller	( 'testMMController', function ($scope) {
+						 this.messageReceived = "";
+						 var testMMController	= this;
+						 this.platforms			= platforms.array;
+						 this.sendMessage = function(id,message){
+							platforms.send(id,'test',message);
+							};
+
+						 //TEST ENVOI IMAGE SOUS BYTES[]
+						 // var canvas = document.getElementById("myCanvas");
+						 // dessin(canvas);
+						 // var ctx=canvas.getContext("2d");
+						 //var io = require('socket.io')(8090);
+						 this.sendImage = function(id){
+						 		//var imgData=ctx.getImageData(0,0,200,100);
+						 		//var msg = {w:imgData.width, h:imgData.height, data:imgData.data.buffer};
+								platforms.send(1,'sendImage',$scope.pixelShirt);
+								console.log("send : ", sessionStorage);
+						 };
+
+						 // this.getImage = function(id){
+						 // 		//TODO recup id source
+							// 	msg = platforms.get(id, this.id,'get');
+						 // };
+
+						 console.log(testMMController);
+						 platforms.init		( "/MM" );
+						 platforms.subscribe( function() {$scope.$apply()}
+											);
+						 platforms.on('test', function(message){
+							testMMController.messageReceived = message;
+							$scope.$apply();
+						  });
+
+						 // platforms.on('get', function(msg){
+							// console.log(msg);
+							// //testMMController.imageReceived = arrayBuffer;
+							// var data = new Uint8ClampedArray(msg.data);
+							// var imageData = new ImageData(data, msg.w, msg.h);
+							// ctx.putImageData(imageData,0,0);
+						 //  });
+
+						 platforms.on('sendImage', function(msg){
+						 	console.log(msg);
+							//testMMController.imageReceived = arrayBuffer;
+							// var data = new Uint8ClampedArray(msg.data);
+							// var imageData = new ImageData(data, msg.w, msg.h);
+							// ctx.putImageData(imageData,0,0);
+							$scope.pixelShirt = msg;
+							//testMMController.imageReceived = imageData;
+							//$scope.$apply();
+						  });
+
+
+						 
+						 // io.on('connection', function(socket){
+						 //   fs.readFile('image.png', function(err, buf){
+						 //     // it's possible to embed binary data
+						 //     // within arbitrarily-complex objects
+						 //     socket.emit('image', { image: true, buffer: buf });
+						 //   });
+						 // });
+
+						}
+					);
+
+
+</script>
