@@ -85,7 +85,7 @@
 							   this.getImage = function(){
 							 		//TODO recup id source
 									platforms.get('getImage', myId);
-							  };
+								};
 
 							  this.changeDisplay = function(id){
 							 		//TODO recup id source

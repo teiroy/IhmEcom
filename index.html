@@ -14,7 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">    
     <link rel="stylesheet" type="text/css" href="CSS/jcarousel.responsive.css">
     <!-- Custom styles for this template -->
     <link href="app/app.css" rel="stylesheet">
@@ -32,7 +32,7 @@
     <script src="bundleProjet.js" defer></script>
 
   </head>
-  <body>
+  <body style="overflow:auto">
 	<!-- Script AngularJS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
@@ -70,7 +70,7 @@
     </nav>
 
     <!-- Zone de contenu -->
-	<div data-ng-view type="block"></div>
+	<div data-ng-view></div>
     
 	<!-- SCRIPT -->
 
@@ -83,6 +83,13 @@
     <!-- Angular -->
     <script src="app/app.js"></script>
     <script src="app/controller.js"></script>
+    
+     <!-- Script AngularJS -->
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.4/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="js/jcarousel.responsive.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->

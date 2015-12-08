@@ -1,42 +1,23 @@
-	<!-- Script AngularJS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-touch.js"></script>
-	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.4/jquery.jcarousel.min.js"></script>
-    <script type="text/javascript" src="js/jcarousel.responsive.js"></script>
-    <script type="text/javascript" src="js/jquery.js"></script>
-	
-      <div class="container text-center" data-ng-controller="DrawingCtrl">
-        <div class="row">
-      	  <canvas class="slideright" id="drawing-canvas" width="650" height="450"></canvas>
-      	</div>
-      </div>
-      
-      <div class="container" data-ng-controller="sendController as sc">  
-          <div class="jcarousel-wrapper">
-            <div class="jcarousel">
-		        <ul>
-		            <li data-ng-repeat="P in sc.platforms" ng-if="P.id!='0'" class="platform">
-				        <div>
-							<button ng-click="sc.changeDisplay(P.id)">
-								<canvas id='drawing-canvas-{{P.id}}' width="120" height="105" ></canvas>
-							</button>
-						<div>
-					</li>
-				 </ul>
-             </div>
+<div class="container text-center" data-ng-controller="sendController as sc">
+	<div class="row">
+		<canvas class="slideright" id="drawing-canvas" width="650" height="450"></canvas>
+    </div>
+       
+    <div class="jcarousel-wrapper">
+    	<div class="jcarousel">
+			<ul>
+				<li data-ng-repeat="P in sc.platforms" ng-if="P.id!='0'" class="platform">
+					<div>
+					<button ng-click="sc.changeDisplay(P.id)">
+						<canvas id='drawing-canvas-{{P.id}}' width="120" height="105" ></canvas>
+					</button>
+					<div>
+				</li>
+			</ul>
+		</div>
             
-            <a href="#view" class="jcarousel-control-prev">‹</a>
-            <a href="#view" class="jcarousel-control-next">›</a>
-            <p class="jcarousel-pagination"></p>
-          </div>
-      </div>
-
-    <!-- Angular -->
-    <script src="app/appView.js"></script>
-    <script src="app/controllerView.js"></script>
-  </body>
-
-</html>
+        <a href="#view" class="jcarousel-control-prev" data-jcarouselcontrol="true">‹</a>
+        <a href="#view" class="jcarousel-control-next" data-jcarouselcontrol="true">›</a>
+        <p class="jcarousel-pagination" data-jcarouselpagination="true"></p>
+	</div>
+</div>

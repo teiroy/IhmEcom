@@ -71,8 +71,7 @@ gulp.task("webpack", function(callback) {
     webpack({
 			entry	: {
 				bundleTest			: "./test.js",
-				bundleProjet 			: "./index.js",
-				bundleDisplay			: "./display.js"
+				bundleProjet 			: "./index.js"
 			},
 			output	: {
 				path			: "./",

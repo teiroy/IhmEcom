@@ -4,7 +4,7 @@ body {
 
 #drawing-canvas {
   border: 3px solid #999;
-  background-size : cover; 
+  background-size : cover;
   /*background-image: url("../images/cirrus.jpg");*/
 }
 

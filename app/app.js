@@ -25,7 +25,7 @@ angular.module("myApp", [
     })
     .when('/view', {
     	templateUrl: 'views/view.html',
-    	controller: 'sendController'
+    	controller: 'ViewCtrl'
     })
     .otherwise({
     	redirectTo: '/welcome'

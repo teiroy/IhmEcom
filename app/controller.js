@@ -23,6 +23,26 @@ angular.module("appControllers", [])
 
 }])
 
+.controller('ViewCtrl',
+[ '$scope', function($scope) {
+	// Set up our canvas
+	//Set up some globals
+    var pixSize = 8, lastPoint = null, currentColor = "000";
+    var myCanvas = document.getElementById('drawing-canvas');
+    var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
+    if (myContext == null) {
+      alert("You must use a browser that supports HTML5 Canvas to run this demo.");
+      return;
+    }
+
+	// Reload
+	for (var pix in $scope.pixelShirt.pixelData) {
+		var coords = pix.split(":");
+		myContext.fillStyle = "#" + $scope.pixelShirt.pixelData[pix];
+		myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
+	};
+}])
+
 .controller('BackImageCtrl',
 [ '$scope', function($scope) {
 		

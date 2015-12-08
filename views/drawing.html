@@ -1,12 +1,16 @@
 <!-- VU + PALLETTE COULEUR + BOUTON SEND -->
 <div class="container" data-ng-controller="sendController as sc" data-ng-swipe-left="envoyer(sc)" data-ng-swipe-right="recuperer(sc)">
 		<div class="row">
-			<div class="col-sm-5"> 
-				<canvas class="slideright" id="drawing-canvas" width="480" height="420"></canvas>
-					<button data-ng-click="envoyer(sc)">ENVOYER</button>
-					<button data-ng-click="recuperer(sc)">RECUPERER</button>
+			<div class="col-sm-9"> 
+				<canvas class="slideright" id="drawing-canvas" width="600px" height="500px"></canvas>
 			</div>
 			<div class="col-sm-2"></div>
 			<div id="colorholder" class="col-sm-1"></div>
+		</div>
+		
+		<div class="row">
+			<button data-ng-click="envoyer(sc)" class="col-sm-2">ENVOYER</button>
+			<div class="col-sm-2"></div>
+			<button data-ng-click="recuperer(sc)" class="col-sm-2">RECUPERER</button>
 		</div>
 </div>
