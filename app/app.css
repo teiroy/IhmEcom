@@ -8,6 +8,10 @@ body {
   /*background-image: url("../images/cirrus.jpg");*/
 }
 
+canvas {
+  background-size : cover;
+}
+
 .colorbox {
   width: 22px;
   height: 22px;
