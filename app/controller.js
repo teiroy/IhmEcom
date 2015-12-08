@@ -63,6 +63,15 @@ angular.module("appControllers", [])
 			  url: window.location.origin + "/images/elephant-970456_960_720.jpg"
 			},
 			{
+			  url: window.location.origin + "/images/balloon-1046658_960_720.jpg"
+			},
+			{
+			  url: window.location.origin + "/images/knowledge-1052010_960_720.jpg"
+			},
+			{
+			  url: window.location.origin + "/images/windrader-1048981_960_720.jpg"
+			},
+			{
 			  url: window.location.origin + "/images/sunrise-1014550_960_720.jpg"
 			}
 			];
