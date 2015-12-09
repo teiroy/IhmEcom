@@ -46,6 +46,7 @@
 
 	var platforms = __webpack_require__(1);
 	var dessin = __webpack_require__(6);
+	var initialised;
 
 	angular	.module('myApp')
 			.controller	( 'sendController', function ($scope) {
@@ -58,12 +59,17 @@
 							  	platforms.send(id,'test',message);
 							  };
 			  
-
 							 // console.log(testMMController);
-							  platforms.init   ( "/MM" );
+							 if(!initialised){
+							   console.log("initialisation");
+							   platforms.init   ( "/MM" );
 
-							  platforms.subscribe( function() {$scope.$apply()}
+							  initialised = true;
+							  console.log(initialised);
+							 }
+							 platforms.subscribe( function() {$scope.$apply()}
 							  );
+							 
 							  platforms.on('test', function(message){
 							    testMMController.messageReceived = message;
 							    $scope.$apply();
@@ -119,8 +125,13 @@
 									myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
 								}
 							   // $scope.pixelShirt = JSON.parse(msg);
+							    console.log("msg", msg);
+
+							    $scope.pixelShirt = JSON.parse(msg);
+							   	
 							    $scope.$apply();
 							  });
+
 
 							   platforms.on('sendImage', function(source,msg){
 							    console.log(msg);
