@@ -115,6 +115,7 @@ angular.module("appControllers", [])
       if (!mouseDown) return;
 
       e.preventDefault();
+      e.stopPropagation();
 
       // Bresenham's line algorithm. We use this to ensure smooth lines are drawn
       var offset = jQuery('canvas').offset();
