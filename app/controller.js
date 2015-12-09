@@ -25,39 +25,10 @@ angular.module("appControllers", [])
 
 .controller('ViewCtrl',
 [ '$scope', function($scope) {
-	// Set up our canvas
-	//Set up some globals
-    var pixSize = 8, lastPoint = null, currentColor = "000";
-    var myCanvas = document.getElementById('drawing-canvas');
-    var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
-    if (myContext == null) {
-      alert("You must use a browser that supports HTML5 Canvas to run this demo.");
-      return;
-    }
-
-	// Reload
-	for (var pix in $scope.pixelShirt.pixelData) {
-		var coords = pix.split(":");
-		myContext.fillStyle = "#" + $scope.pixelShirt.pixelData[pix];
-		myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
-	};
 }])
 
 .controller('BackImageCtrl',
 [ '$scope', function($scope) {
-		
-		$scope.listeImg2 = function() {
-			var tab = new Array();
-			var dossier = userhome.childByNamePath("images");
-			var images = dossier.children;
-			var nombreImg = images.length;
-		
-			for(var i=0;i<nombreImg;i++){
-				console.log(tab[i] + "bla");
-				tab[i] = {url : images[i].name}; //recupere le nom du document courant contenu dans l'espace "../images"
-			}
-			return tab;
-		};
 		
 		// Set up
 		$scope.listeImg = [
@@ -118,18 +89,6 @@ angular.module("appControllers", [])
       alert("You must use a browser that supports HTML5 Canvas to run this demo.");
       return;
     }
-    
-    // Background Image
-	jQuery(myCanvas).css({
-		"background-image" : "url("+pixShirt.backImg+")"
-	});
-    
-	// Reload
-	for (var pix in pixShirt.pixelData) {
-		var coords = pix.split(":");
-		myContext.fillStyle = "#" + pixShirt.pixelData[pix];
-		myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
-	}
 
     // Setup each color palette & add it to the screen
     var colors = ["fff","000","f00","0f0","00f","88f","f8d","f88","f05","f80","0f8","cf0","08f","408","ff8","8ff"];
@@ -192,6 +151,18 @@ angular.module("appControllers", [])
       }
       lastPoint = [x1, y1];
     };
+     // Background Image
+	jQuery(myCanvas).css({
+		"background-image" : "url("+pixShirt.backImg+")"
+	});
+    
+	// Reload
+	for (var pix in pixShirt.pixelData) {
+		var coords = pix.split(":");
+		myContext.fillStyle = "#" + pixShirt.pixelData[pix];
+		myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
+	}
+    
     $(myCanvas).mousemove(drawLineOnMouseMove);
     $(myCanvas).mousedown(drawLineOnMouseMove);
     
