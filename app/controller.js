@@ -166,6 +166,7 @@ angular.module("appControllers", [])
       var sx = (x0 < x1) ? 1 : -1, sy = (y0 < y1) ? 1 : -1, err = dx - dy;
       while (true) {
         //write the pixel or if we are drawing white, remove the pixel
+	pixShirt = JSON.parse(sessionStorage.pixelShirt);
         if (currentColor === "fff") {
 			delete pixShirt.pixelData[x0+":"+y0];
 			myContext.clearRect(x0 * pixSize, y0 * pixSize, pixSize, pixSize);

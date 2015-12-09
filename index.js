@@ -38,7 +38,7 @@ angular	.module('myApp')
 						  //var imgData=ctx.getImageData(0,0,200,100);
 						  //var msg = {w:imgData.width, h:imgData.height, data:imgData.data.buffer};
 						  	console.log("Sending");
-						  	platforms.send(1,myId,'sendImage',$scope.pixelShirt);
+						  	platforms.send(1,myId,'sendImage',JSON.parse(sessionStorage.pixelShirt));
 						  	console.log("send : ", sessionStorage);
 						  };
 
@@ -81,7 +81,7 @@ angular	.module('myApp')
 						   // $scope.pixelShirt = JSON.parse(msg);
 						    console.log("msg", msg);
 
-						    $scope.pixelShirt = JSON.parse(msg);
+						    sessionStorage.pixelShirt = JSON.stringify(pixShirt);
 						   	
 						    $scope.$apply();
 						  });
