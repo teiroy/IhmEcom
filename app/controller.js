@@ -81,6 +81,7 @@ angular.module("appControllers", [])
 	//Set up some globals
     var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
     var pixShirt = $scope.$parent.pixelShirt;
+    sessionStorage.pixelShirt = JSON.stringify(pixShirt);
 	
     // Set up our canvas
     var myCanvas = document.getElementById('drawing-canvas');
